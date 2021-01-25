@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * @author Nile
+ */
 @Data
 public class Result<T> implements Serializable {
 
@@ -29,26 +32,31 @@ public class Result<T> implements Serializable {
      * 害。具体情况集体分析吧
      */
     public Result() {
-        this.code = ResultEnum.SUCCESS.getCode();
-        this.msg = ResultEnum.SUCCESS.getMsg();
+        this.code = ResultEnum.GET_SUCCESS.getCode();
+        this.msg = ResultEnum.GET_SUCCESS.getMsg();
     }
     public Result(String msg) {
-        this.code = ResultEnum.SUCCESS.getCode();
+        this.code = ResultEnum.GET_SUCCESS.getCode();
         this.msg = msg;
     }
     public Result(T data) {
-        this.code = ResultEnum.SUCCESS.getCode();
-        this.msg = ResultEnum.SUCCESS.getMsg();
+        this.code = ResultEnum.GET_SUCCESS.getCode();
+        this.msg = ResultEnum.GET_SUCCESS.getMsg();
         this.data = data;
     }
     public Result(String msg, T data) {
-        this.code = ResultEnum.SUCCESS.getCode();
+        this.code = ResultEnum.GET_SUCCESS.getCode();
         this.msg = msg;
         this.data = data;
     }
     public Result(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
+    }
+    public Result(ResultEnum resultEnum,T data) {
+        this.code = resultEnum.getCode();
+        this.msg = resultEnum.getMsg();
+        this.data = data;
     }
     public Result(ResultEnum resultEnum) {
         this.code = resultEnum.getCode();

@@ -1,4 +1,4 @@
-package com.peng44.web_template.log;
+package com.peng44.web_template.modules.log;
 
 import com.alibaba.fastjson.JSON;
 import com.peng44.web_template.commons.enums.StateEnum;
@@ -46,7 +46,7 @@ public class RequestAspect {
      * @Pointcut 切点 指定那些文件需要 AOP
      * 两个..代表所有子目录，最后括号里的两个..代表所有参数
      */
-    @Pointcut("execution( * com.peng44.web_template.modules..*.controller..*(..))")
+    @Pointcut("execution( * com.peng44.web_template.modules..a*.controller..*(..))")
     public void logPointCut() {
     }
 

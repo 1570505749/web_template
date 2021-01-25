@@ -7,17 +7,20 @@ import com.peng44.web_template.commons.utils.Result;
 import com.peng44.web_template.commons.utils.StringUtils;
 import com.peng44.web_template.modules.log.entity.Log;
 import com.peng44.web_template.modules.log.service.LogService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author Nile
+ */
 @RestController
 @RequestMapping("/log")
 public class LogController {
 
-    @Autowired
+    @Resource
     private LogService logService;
 
     /**
@@ -43,7 +46,7 @@ public class LogController {
             // 3. 不支持add和remove方法
             List<String> sortList = Arrays.asList(sortColumns);
             if(!sortList.contains(newSortColumn.toLowerCase())) {
-                return new Result<>(ResultEnum.PARAMS_ERROR.getCode(),"参数错误！");
+                return new Result<>(ResultEnum.PARAMS_ERROR);
             }
         }
         page = logService.getByPage(page);
@@ -58,7 +61,7 @@ public class LogController {
     @DeleteMapping("/delete/{id}")
     public Result<Object> delete(@PathVariable("id") Integer id){
         logService.deleteById(id);
-        return new Result<>("删除成功!");
+        return new Result<>(ResultEnum.DELETE_SUCCESS);
     }
 
     /**
@@ -69,7 +72,7 @@ public class LogController {
     @PutMapping("/deleteByIds")
     public Result<Object> deleteByIds(@RequestBody List<Integer> ids) {
         logService.deleteByIds(ids);
-        return new Result<>("删除成功！");
+        return new Result<>(ResultEnum.DELETE_SUCCESS);
     }
 
 }

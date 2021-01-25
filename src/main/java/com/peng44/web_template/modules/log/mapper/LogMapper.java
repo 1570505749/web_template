@@ -18,7 +18,7 @@ public interface LogMapper {
      *
      * @param logger
      */
-    @Insert("insert into cl_log(log_url, log_params, log_status, log_message, log_method, log_time, log_result, log_ip) " +
+    @Insert("insert into sys_log(log_url, log_params, log_status, log_message, log_method, log_time, log_result, log_ip) " +
             "values (#{logUrl}, #{logParams}, #{logStatus},  #{logMessage}, #{logMethod}, #{logTime}, #{logResult}, #{logIp})")
     void save(Log logger);
 
@@ -31,7 +31,7 @@ public interface LogMapper {
     @Select("<script>select\n" +
             "        log_id, log_url, log_params, log_status, log_message,\n" +
             "        log_method, log_time, log_result, log_ip, created_time\n" +
-            "        from cl_log\n" +
+            "        from sys_log\n" +
             "        <where>\n" +
             "            <if test=\"params.logUrl!=null and params.logUrl!=''\">\n" +
             "                and log_url = #{params.logUrl}\n" +
@@ -61,7 +61,7 @@ public interface LogMapper {
      */
     @Select("<script>select\n" +
             "        count(*)\n" +
-            "        from cl_log\n" +
+            "        from sys_log\n" +
             "        <where>\n" +
             "            <if test=\"params.logUrl!=null and params.logUrl!=''\">\n" +
             "                and log_url = #{params.logUrl}\n" +
@@ -83,7 +83,7 @@ public interface LogMapper {
      * 根据id删除
      * @param id
      */
-    @Delete("delete from cl_log where log_id = #{id}")
+    @Delete("delete from sys_log where log_id = #{id}")
     void deleteById(Integer id);
 
     /**
@@ -91,7 +91,7 @@ public interface LogMapper {
      * @param ids
      */
     @Delete("<script>" +
-            "        delete from cl_log\n" +
+            "        delete from sys_log\n" +
             "        where log_id in\n" +
             "        <foreach collection=\"list\" separator=\",\" item=\"id\" open=\"(\" close=\")\">\n" +
             "            #{id}\n" +
